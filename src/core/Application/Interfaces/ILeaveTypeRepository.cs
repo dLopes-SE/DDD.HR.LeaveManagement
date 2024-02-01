@@ -2,7 +2,7 @@
 
 namespace Application.Interfaces
 {
-  public interface ILeaveTypeRepository : IGenericRepository<LeaveType>
+  public interface ILeaveTypeRepository : IGenericRepository<List<LeaveType>>
   {
 
   }
