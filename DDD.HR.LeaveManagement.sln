@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "src\core\App
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "infastructure", "infastructure", "{B6F3A6F6-DA1F-4A4C-AEF8-05696E722D62}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistance", "Persistance\Persistance.csproj", "{6E675005-6023-4CDB-81C9-B1C5DC4A4828}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistence", "Persistance\Persistence.csproj", "{6E675005-6023-4CDB-81C9-B1C5DC4A4828}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,4 +1,5 @@
 ﻿using Application.Interfaces;
+using Domain.Common;
 using Microsoft.EntityFrameworkCore;
 using Persistance.DataBaseContext;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Persistance.Repositories
 {
-  public class GenericRepository<T>(HrDbContext context) : IGenericRepository<T> where T : class
+  public class GenericRepository<T>(HrDbContext context) : IGenericRepository<T> where T : BaseEntity
   {
     protected readonly HrDbContext _context = context;
 
@@ -27,12 +28,14 @@ namespace Persistance.Repositories
 
     public async Task<IReadOnlyList<T>> GetAsync()
     {
-      return await _context.Set<T>().ToListAsync();
+      return await _context.Set<T>().AsNoTracking().ToListAsync();
     }
 
     public async Task<T> GetByIdAsync(int id)
     {
-      return await _context.Set<T>().FindAsync(id);
+      return await _context.Set<T>()
+        .AsNoTracking()
+        .FirstOrDefaultAsync(q => q.Id == id);
     }
 
     public async Task UpdateAsync(T entity)
