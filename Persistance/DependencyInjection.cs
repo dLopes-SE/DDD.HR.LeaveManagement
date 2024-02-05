@@ -9,7 +9,7 @@ namespace Persistance
 {
   public static class DependencyInjection
   {
-    public static IServiceCollection AddPersistanceServices(this IServiceCollection services, IConfiguration configs)
+    public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configs)
     {
       services.AddDbContext<HrDbContext>(options =>
       {
