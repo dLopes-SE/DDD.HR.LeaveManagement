@@ -1,9 +1,9 @@
-﻿using Application.Interfaces;
+﻿using Application.Interfaces.Persistence;
 using MediatR;
 
 namespace Application.Features.LeaveType.Command.DeleteLeaveType
 {
-  public class DeleteLeaveTypeCommandHandler(ILeaveTypeRepository leaveTypeRepository) : IRequestHandler<DeleteLeaveTypeCommand, Unit>
+    public class DeleteLeaveTypeCommandHandler(ILeaveTypeRepository leaveTypeRepository) : IRequestHandler<DeleteLeaveTypeCommand, Unit>
   {
     private readonly ILeaveTypeRepository _leaveTypeRepo = leaveTypeRepository;
 

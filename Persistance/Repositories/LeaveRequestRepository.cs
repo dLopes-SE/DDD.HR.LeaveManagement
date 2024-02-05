@@ -1,11 +1,11 @@
-﻿using Application.Interfaces;
+﻿using Application.Interfaces.Persistence;
 using Domain;
 using Microsoft.EntityFrameworkCore;
 using Persistance.DataBaseContext;
 
 namespace Persistance.Repositories
 {
-  public class LeaveRequestRepository(HrDbContext context) : GenericRepository<LeaveRequest>(context), ILeaveRequestRepository
+    public class LeaveRequestRepository(HrDbContext context) : GenericRepository<LeaveRequest>(context), ILeaveRequestRepository
   {
     public async Task<List<LeaveRequest>> GetLeaveRequestsWithDetails()
     {

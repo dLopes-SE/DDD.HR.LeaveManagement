@@ -1,4 +1,4 @@
-﻿using Application.Interfaces;
+﻿using Application.Interfaces.Persistence;
 using Domain.Common;
 using Microsoft.EntityFrameworkCore;
 using Persistance.DataBaseContext;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Persistance.Repositories
 {
-  public class GenericRepository<T>(HrDbContext context) : IGenericRepository<T> where T : BaseEntity
+    public class GenericRepository<T>(HrDbContext context) : IGenericRepository<T> where T : BaseEntity
   {
     protected readonly HrDbContext _context = context;
 

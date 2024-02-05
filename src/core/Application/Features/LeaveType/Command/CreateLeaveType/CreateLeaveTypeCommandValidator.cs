@@ -1,9 +1,9 @@
-﻿using Application.Interfaces;
+﻿using Application.Interfaces.Persistence;
 using FluentValidation;
 
 namespace Application.Features.LeaveType.Command.CreateLeaveType
 {
-  public class CreateLeaveTypeCommandValidator : AbstractValidator<CreateLeaveTypeCommand>
+    public class CreateLeaveTypeCommandValidator : AbstractValidator<CreateLeaveTypeCommand>
   {
     private readonly ILeaveTypeRepository _leaveTypeRepo;
     public CreateLeaveTypeCommandValidator(ILeaveTypeRepository leaveTypeRepository)

@@ -1,11 +1,11 @@
 ﻿using Application.Exceptions;
-using Application.Interfaces;
+using Application.Interfaces.Persistence;
 using AutoMapper;
 using MediatR;
 
 namespace Application.Features.LeaveType.Command.CreateLeaveType
 {
-  public class CreateLeaveTypeCommandHandler(IMapper mapper, ILeaveTypeRepository leaveTypeRepository) : IRequestHandler<CreateLeaveTypeCommand, int>
+    public class CreateLeaveTypeCommandHandler(IMapper mapper, ILeaveTypeRepository leaveTypeRepository) : IRequestHandler<CreateLeaveTypeCommand, int>
   {
     private readonly IMapper _mapper = mapper;
     private readonly ILeaveTypeRepository _leaveTypeRepo = leaveTypeRepository;

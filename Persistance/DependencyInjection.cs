@@ -1,4 +1,4 @@
-﻿using Application.Interfaces;
+﻿using Application.Interfaces.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -7,7 +7,7 @@ using Persistance.Repositories;
 
 namespace Persistance
 {
-  public static class DependencyInjection
+    public static class DependencyInjection
   {
     public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configs)
     {

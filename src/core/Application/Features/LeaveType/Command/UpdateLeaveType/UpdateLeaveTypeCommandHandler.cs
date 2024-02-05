@@ -1,10 +1,10 @@
-﻿using Application.Interfaces;
+﻿using Application.Interfaces.Persistence;
 using AutoMapper;
 using MediatR;
 
 namespace Application.Features.LeaveType.Command.UpdateLeaveType
 {
-  public class UpdateLeaveTypeCommandHandler(IMapper mapper, ILeaveTypeRepository leaveTypeRepository) : IRequestHandler<UpdateLeaveTypeCommand, Unit>
+    public class UpdateLeaveTypeCommandHandler(IMapper mapper, ILeaveTypeRepository leaveTypeRepository) : IRequestHandler<UpdateLeaveTypeCommand, Unit>
   {
     private readonly IMapper _mapper = mapper;
     private readonly ILeaveTypeRepository _leaveTypeRequestRepository = leaveTypeRepository;

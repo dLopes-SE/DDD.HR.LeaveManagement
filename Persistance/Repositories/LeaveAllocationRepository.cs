@@ -1,11 +1,11 @@
-﻿using Application.Interfaces;
+﻿using Application.Interfaces.Persistence;
 using Domain;
 using Microsoft.EntityFrameworkCore;
 using Persistance.DataBaseContext;
 
 namespace Persistance.Repositories
 {
-  public class LeaveAllocationRepository(HrDbContext context) : GenericRepository<LeaveAllocation>(context), ILeaveAllocationRepository
+    public class LeaveAllocationRepository(HrDbContext context) : GenericRepository<LeaveAllocation>(context), ILeaveAllocationRepository
   {
     public async Task AddAlocations(List<LeaveAllocation> allocations)
     {

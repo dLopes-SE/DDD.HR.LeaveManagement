@@ -1,11 +1,11 @@
 ﻿using Application.Exceptions;
-using Application.Interfaces;
+using Application.Interfaces.Persistence;
 using AutoMapper;
 using MediatR;
 
 namespace Application.Features.LeaveType.Queries.GetLeaveTypeDetails
 {
-  public class GetLeaveTypeDetailsHandler(IMapper mapper, ILeaveTypeRepository leaveTypeRepository) : IRequestHandler<LeaveTypeDetailsQuery, LeaveTypeDetailsDto>
+    public class GetLeaveTypeDetailsHandler(IMapper mapper, ILeaveTypeRepository leaveTypeRepository) : IRequestHandler<LeaveTypeDetailsQuery, LeaveTypeDetailsDto>
   {
     private readonly IMapper _mapper = mapper;
     private readonly ILeaveTypeRepository _leaveTypeRepo = leaveTypeRepository;
