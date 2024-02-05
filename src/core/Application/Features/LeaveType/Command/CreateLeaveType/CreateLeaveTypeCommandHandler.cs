@@ -21,7 +21,9 @@ namespace Application.Features.LeaveType.Command.CreateLeaveType
 
       var data = _mapper.Map<Domain.LeaveType>(request);
 
-      return (await _leaveTypeRepo.CreateAsync(data)).Id;
+      await _leaveTypeRepo.CreateAsync(data);
+
+      return data.Id;
     }
   }
 }
