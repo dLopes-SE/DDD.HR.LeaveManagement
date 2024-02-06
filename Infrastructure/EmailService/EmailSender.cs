@@ -7,7 +7,8 @@ namespace Infrastructure.EmailService
   {
     public Task<bool> SendEmail(EmailMessage email)
     {
-      throw new NotImplementedException();
+      // Not implemeneted
+      return Task.FromResult(true);
     }
   }
 }
