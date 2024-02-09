@@ -8,7 +8,6 @@ namespace Persistance.DataBaseContext
   {
     public HrDbContext(DbContextOptions<HrDbContext> options) : base(options)
     {
-
     }
 
     public DbSet<LeaveType> LeaveTypes { get; set; }

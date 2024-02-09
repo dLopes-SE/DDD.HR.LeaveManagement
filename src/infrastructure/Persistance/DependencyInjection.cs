@@ -7,7 +7,7 @@ using Persistance.Repositories;
 
 namespace Persistance
 {
-    public static class DependencyInjection
+  public static class DependencyInjection
   {
     public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configs)
     {
