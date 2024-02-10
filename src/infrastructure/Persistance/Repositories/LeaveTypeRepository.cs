@@ -9,7 +9,7 @@ namespace Persistance.Repositories
   {
     public async Task<bool> IsLeaveTypeUnique(string name)
     {
-      return await _context.LeaveTypes.AnyAsync(q => q.Name == name);
+      return !(await _context.LeaveTypes.AnyAsync(q => q.Name == name));
     }
   }
 }

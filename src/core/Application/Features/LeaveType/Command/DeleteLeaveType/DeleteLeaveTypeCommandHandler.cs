@@ -1,9 +1,10 @@
-﻿using Application.Interfaces.Persistence;
+﻿using Application.Exceptions;
+using Application.Interfaces.Persistence;
 using MediatR;
 
 namespace Application.Features.LeaveType.Command.DeleteLeaveType
 {
-    public class DeleteLeaveTypeCommandHandler(ILeaveTypeRepository leaveTypeRepository) : IRequestHandler<DeleteLeaveTypeCommand, Unit>
+  public class DeleteLeaveTypeCommandHandler(ILeaveTypeRepository leaveTypeRepository) : IRequestHandler<DeleteLeaveTypeCommand, Unit>
   {
     private readonly ILeaveTypeRepository _leaveTypeRepo = leaveTypeRepository;
 
@@ -14,9 +15,10 @@ namespace Application.Features.LeaveType.Command.DeleteLeaveType
       if (leaveType is not null)
       {
         await _leaveTypeRepo.DeleteAsync(leaveType);
+        return Unit.Value;
       }
 
-      return Unit.Value;
+      throw new NotFoundException(nameof (leaveType), request.Id);
     }
   }
 }
