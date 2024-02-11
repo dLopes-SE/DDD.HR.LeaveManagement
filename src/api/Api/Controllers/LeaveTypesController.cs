@@ -1,13 +1,10 @@
-﻿using Application.Exceptions;
-using Application.Features.LeaveType.Command.CreateLeaveType;
+﻿using Application.Features.LeaveType.Command.CreateLeaveType;
 using Application.Features.LeaveType.Command.DeleteLeaveType;
 using Application.Features.LeaveType.Command.UpdateLeaveType;
 using Application.Features.LeaveType.Queries.GetAllLeaveTypes;
 using Application.Features.LeaveType.Queries.GetLeaveTypeDetails;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System.IdentityModel.Tokens.Jwt;
-using System.Text.Json;
 
 namespace Api.Controllers
 {
