@@ -10,14 +10,9 @@ namespace Api.Controllers
 {
   [Route("api/[controller]")]
   [ApiController]
-  public class LeaveTypesController : Controller
+  public class LeaveTypesController(IMediator mediator) : Controller
   {
-    private readonly IMediator _mediator;
-
-    public LeaveTypesController(IMediator mediator)
-    {
-      _mediator = mediator;
-    }
+    private readonly IMediator _mediator = mediator;
 
     [HttpGet]
     [ProducesResponseType(200)]
@@ -65,11 +60,11 @@ namespace Api.Controllers
     [ProducesResponseType(404)]
     public async Task<ActionResult> Delete(int id)
     {
-      var deleteResult = await _mediator.Send(new DeleteLeaveTypeCommand()
+      await _mediator.Send(new DeleteLeaveTypeCommand()
       {
         Id = id
       });
-      return Ok(deleteResult);
+      return NoContent();
     }
   }
 }
