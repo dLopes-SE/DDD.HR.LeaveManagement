@@ -1,6 +1,9 @@
 ﻿using Application.Features.LeaveRequest;
-using Application.Features.LeaveRequest.GetLeaveRequestDetail;
-using Application.Features.LeaveRequest.GetLeaveRequestList;
+using Application.Features.LeaveRequest.Commands.CreateLeaveRequest;
+using Application.Features.LeaveRequest.Commands.DeleteLeaveRequest;
+using Application.Features.LeaveRequest.Commands.UpdateLeaveRequest;
+using Application.Features.LeaveRequest.Queries.GetLeaveRequestDetail;
+using Application.Features.LeaveRequest.Queries.GetLeaveRequestList;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -29,6 +32,34 @@ namespace Api.Controllers
     {
       var leaveRequest = await mediator.Send(new GetLeaveRequestDetailQuery() { Id = id });
       return Ok(leaveRequest);
+    }
+
+    [HttpPost]
+    [ProducesResponseType(201)]
+    [ProducesResponseType(400)]
+    public async Task<ActionResult<int>> Create([FromBody] CreateLeaveRequestCommand leaveRequestObj)
+    {
+      var id = await mediator.Send(leaveRequestObj);
+      return CreatedAtAction(nameof(Get), new { id });
+    }
+
+    [HttpPut]
+    [ProducesResponseType(204)]
+    [ProducesResponseType(400)]
+    [ProducesResponseType(404)]
+    public async Task<ActionResult> Update([FromBody] UpdateLeaveRequestCommand leaveRequestObj)
+    {
+      await mediator.Send(leaveRequestObj);
+      return NoContent();
+    }
+
+    [HttpDelete]
+    [ProducesResponseType(204)]
+    [ProducesResponseType(404)]
+    public async Task<ActionResult> Delete(int id)
+    {
+      await mediator.Send(new DeleteLeaveRequestCommand() { Id = id });
+      return NoContent();
     }
   }
 }

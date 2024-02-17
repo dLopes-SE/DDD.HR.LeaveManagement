@@ -2,7 +2,7 @@
 using AutoMapper;
 using MediatR;
 
-namespace Application.Features.LeaveRequest.GetLeaveRequestList
+namespace Application.Features.LeaveRequest.Queries.GetLeaveRequestList
 {
     public class GetLeaveRequestListQueryHandler(ILeaveRequestRepository leaveRequestRepo, IMapper mapper) : IRequestHandler<GetLeaveRequestListQuery, List<LeaveRequestListDto>>
     {

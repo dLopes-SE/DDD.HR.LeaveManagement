@@ -1,6 +1,6 @@
 ﻿using Application.Features.LeaveType.Queries.GetAllLeaveTypes;
 
-namespace Application.Features.LeaveRequest.GetLeaveRequestList
+namespace Application.Features.LeaveRequest.Queries.GetLeaveRequestList
 {
     public class LeaveRequestListDto
     {
