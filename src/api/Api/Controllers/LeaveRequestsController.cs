@@ -1,4 +1,5 @@
-﻿using Application.Features.LeaveRequest;
+﻿using Application.Features.LeaveRequest.Commands.CancelLeaveRequest;
+using Application.Features.LeaveRequest.Commands.ChangeLeaveRequestApproval;
 using Application.Features.LeaveRequest.Commands.CreateLeaveRequest;
 using Application.Features.LeaveRequest.Commands.DeleteLeaveRequest;
 using Application.Features.LeaveRequest.Commands.UpdateLeaveRequest;
@@ -9,9 +10,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
-    [Route("/api/[controller]")]
+  [Route("/api/[controller]")]
   [ApiController]
-  public class LeaveRequestController(IMediator mediator) : Controller
+  public class LeaveRequestsController(IMediator mediator) : Controller
   {
     [HttpGet]
     [ProducesResponseType(200)]
@@ -47,15 +48,37 @@ namespace Api.Controllers
     [ProducesResponseType(204)]
     [ProducesResponseType(400)]
     [ProducesResponseType(404)]
+    [ProducesDefaultResponseType]
     public async Task<ActionResult> Update([FromBody] UpdateLeaveRequestCommand leaveRequestObj)
     {
       await mediator.Send(leaveRequestObj);
       return NoContent();
     }
 
+    [HttpPut("ApproveRequest")]
+    [ProducesResponseType(204)]
+    [ProducesResponseType(404)]
+    [ProducesDefaultResponseType]
+    public async Task<ActionResult> ApproveRequest(ChangeLeaveRequestApprovalCommand ApproveRequestObj)
+    {
+      await mediator.Send(ApproveRequestObj);
+      return NoContent();
+    }
+
+    [HttpPut("CancelRequest")]
+    [ProducesResponseType(204)]
+    [ProducesResponseType(404)]
+    [ProducesDefaultResponseType]
+    public async Task<ActionResult> CancelRequest(CancelLeaveRequestCommand cancelRequestObj)
+    {
+      await mediator.Send(cancelRequestObj);
+      return NoContent();
+    }
+
     [HttpDelete]
     [ProducesResponseType(204)]
     [ProducesResponseType(404)]
+    [ProducesDefaultResponseType]
     public async Task<ActionResult> Delete(int id)
     {
       await mediator.Send(new DeleteLeaveRequestCommand() { Id = id });

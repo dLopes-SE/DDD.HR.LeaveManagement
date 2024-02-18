@@ -19,9 +19,4 @@
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\LeaveRequest\Commands\ChangeLeaveRequestApproval\" />
-    <Folder Include="Features\LeaveRequest\Commands\CancelLeaveRequest\" />
-  </ItemGroup>
-
 </Project>

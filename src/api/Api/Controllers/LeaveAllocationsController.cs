@@ -10,7 +10,7 @@ namespace Api.Controllers
 {
   [Route("api/[controller]")]
   [ApiController]
-  public class LeaveAllocationController(IMediator mediator) : Controller
+  public class LeaveAllocationsController(IMediator mediator) : Controller
   {
     [HttpGet]
     [ProducesResponseType(200)]

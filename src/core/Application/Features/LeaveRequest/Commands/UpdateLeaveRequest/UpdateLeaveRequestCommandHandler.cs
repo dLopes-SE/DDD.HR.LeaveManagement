@@ -2,7 +2,6 @@
 using Application.Interfaces.Persistence;
 using AutoMapper;
 using MediatR;
-using System.ComponentModel.DataAnnotations;
 
 namespace Application.Features.LeaveRequest.Commands.UpdateLeaveRequest
 {
