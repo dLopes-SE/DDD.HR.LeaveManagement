@@ -1,0 +1,17 @@
+[
+  {
+    "Id": 1,
+    "DefaultDays": 10,
+    "Name": "Test Vacation"
+  },
+  {
+    "Id": 2,
+    "DefaultDays": 20,
+    "Name": "Test Vacation 2"
+  },
+  {
+    "Id": 3,
+    "DefaultDays": 30,
+    "Name": "Test Vacation 3"
+  }
+]
