@@ -1,6 +1,4 @@
-﻿using Application.Features.LeaveType.Command.UpdateLeaveType;
-using MediatR;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
 namespace Application

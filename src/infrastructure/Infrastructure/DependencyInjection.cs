@@ -1,8 +1,9 @@
-﻿using Application.Interfaces.Logging;
+﻿using Application.Interfaces.Email;
+using Application.Interfaces.Logging;
+using Infrastructure.EmailService;
 using Infrastructure.Logging;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System.Runtime.CompilerServices;
 
 namespace Infrastructure
 {
@@ -12,6 +13,7 @@ namespace Infrastructure
     {
       // We should add here DI for the email sender service
       services.AddSingleton(typeof(IAppLogger<>), typeof(LoggerAdapter<>));
+      services.AddScoped<IEmailSender, EmailSender>();
 
       return services;
     } 
