@@ -2,7 +2,7 @@
 using Application.Features.LeaveRequest.Commands.CancelLeaveRequest;
 using Application.Interfaces.Email;
 using Application.Interfaces.Persistence;
-using Application.Models;
+using Application.Models.Email;
 using MediatR;
 
 namespace Api.Controllers

@@ -1,9 +1,9 @@
 ﻿using Application.Interfaces.Email;
-using Application.Models;
+using Application.Models.Email;
 
 namespace Infrastructure.EmailService
 {
-  public class EmailSender : IEmailSender
+    public class EmailSender : IEmailSender
   {
     public Task<bool> SendEmail(EmailMessage email)
     {

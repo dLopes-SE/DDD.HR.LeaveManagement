@@ -1,7 +1,7 @@
 ﻿using Application.Exceptions;
 using Application.Interfaces.Email;
 using Application.Interfaces.Persistence;
-using Application.Models;
+using Application.Models.Email;
 using AutoMapper;
 using MediatR;
 
