@@ -69,7 +69,13 @@ namespace Identity.Services
         return new RegistrationResponse { UserId =  user.Id };
       }
 
-      throw new BadRequestException($"{result.Errors}");
+      var str = new StringBuilder();
+      foreach (var err in result.Errors)
+      {
+        str.AppendFormat(".{0}\n", err.Description);
+      }
+
+      throw new BadRequestException($"{str}");
     }
 
     public async Task<JwtSecurityToken> GenerateJwtSecurityToken(ApplicationUser user)
