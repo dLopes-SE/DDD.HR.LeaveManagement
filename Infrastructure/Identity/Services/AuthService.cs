@@ -4,8 +4,11 @@ using Application.Models.Identity;
 using Identity.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
-using System.CodeDom.Compiler;
+using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Security.Claims;
+using System.Text;
 
 namespace Identity.Services
 {
@@ -36,7 +39,7 @@ namespace Identity.Services
         throw new BadRequestException($"Credentials for '{request.Email}' aren't valid.");
       }
 
-      var jwtSecurityToken = GenerateJwtSecurityToken(user);
+      var jwtSecurityToken = await GenerateJwtSecurityToken(user);
 
       return new AuthResponse
       {
@@ -47,14 +50,55 @@ namespace Identity.Services
       };
     }
 
-    public Task<RegistrationResponse> Register(RegistrationRequest request)
+    public async Task<RegistrationResponse> Register(RegistrationRequest request)
     {
-      throw new NotImplementedException();
+      var user = new ApplicationUser()
+      {
+        FirstName = request.FirstName,
+        LastName = request.LastName,
+        Email = request.Email,
+        UserName = request.UserName,
+        EmailConfirmed = true
+      };
+
+      var result = await _userManager.CreateAsync(user, request.Password);
+
+      if (result.Succeeded)
+      {
+        await _userManager.AddToRoleAsync(user, "Employee");
+        return new RegistrationResponse { UserId =  user.Id };
+      }
+
+      throw new BadRequestException($"{result.Errors}");
     }
 
-    public JwtSecurityToken GenerateJwtSecurityToken(ApplicationUser user)
+    public async Task<JwtSecurityToken> GenerateJwtSecurityToken(ApplicationUser user)
     {
-      throw new NotImplementedException();
+      var userClaims = await _userManager.GetClaimsAsync(user);
+      var roles = await _userManager.GetRolesAsync(user);
+
+      var userRoles = roles.Select(r => new Claim(ClaimTypes.Role, r));
+
+      var claims = new[]
+      {
+        new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
+        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+        new Claim(JwtRegisteredClaimNames.Email, user.Email),
+        new Claim("uid", user.Id)
+      }
+      .Union(userClaims)
+      .Union(userRoles);
+
+      var symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Key));
+
+      var signingCredentials = new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256);
+
+      return new JwtSecurityToken(
+        issuer: _jwtSettings.Issuer,
+        audience: _jwtSettings.Audience,
+        claims: claims,
+        expires: DateTime.Now.AddMinutes(_jwtSettings.DurationInMinutes),
+        signingCredentials: signingCredentials);
     }
   }
 }
