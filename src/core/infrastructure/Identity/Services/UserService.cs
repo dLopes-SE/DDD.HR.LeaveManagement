@@ -1,9 +1,7 @@
-﻿using Application.Exceptions;
-using Application.Interfaces.Identity;
+﻿using Application.Interfaces.Identity;
 using Application.Models.Identity;
 using Identity.Models;
 using Microsoft.AspNetCore.Identity;
-using System.Security.Cryptography.Xml;
 
 namespace Identity.Services
 {
@@ -40,6 +38,11 @@ namespace Identity.Services
         LastName = user.LastName,
         Email = user.Email
       };
+    }
+
+    public Task<Employee> GetEmployeeById(int id)
+    {
+      throw new NotImplementedException();
     }
   }
 }
