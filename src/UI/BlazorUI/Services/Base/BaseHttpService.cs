@@ -1,36 +1,37 @@
-﻿using System.Reflection.Metadata.Ecma335;
+﻿using Blazored.LocalStorage;
 
-namespace BlazorUI.Services.Base
+namespace BlazorUI.Services.Base;
+public class BaseHttpService
 {
-  public class BaseHttpService
-  {
-    protected IClient _client { get; }
-    public BaseHttpService(IClient client)
-    {
-      _client = client;
-    }
+  protected IClient _client { get; }
+  protected readonly ILocalStorageService _localStorage;
 
-    protected Response<Guid> ConvertApiExceptions<Guid>(ApiException ex)
+  public BaseHttpService(IClient client, ILocalStorageService localStorage)
+  {
+    _client = client;
+    _localStorage = localStorage;
+  }
+
+  protected Response<Guid> ConvertApiExceptions<Guid>(ApiException ex)
+  {
+    return ex.StatusCode switch
     {
-      return ex.StatusCode switch
+      400 => new Response<Guid>
       {
-        400 => new Response<Guid>
-        {
-          Message = "Invalid data was submitted",
-          ValidationErrors = ex.Response,
-          Success = false
-        },
-        404 => new Response<Guid>
-        {
-          Message = "The record was not found",
-          Success = false
-        },
-        _ => new Response<Guid>
-        {
-          Message = "Something went wrong, please try again later",
-          Success = false
-        }
-      };
-    }
-  }  
-}
+        Message = "Invalid data was submitted",
+        ValidationErrors = ex.Response,
+        Success = false
+      },
+      404 => new Response<Guid>
+      {
+        Message = "The record was not found",
+        Success = false
+      },
+      _ => new Response<Guid>
+      {
+        Message = "Something went wrong, please try again later",
+        Success = false
+      }
+    };
+  }
+}  
