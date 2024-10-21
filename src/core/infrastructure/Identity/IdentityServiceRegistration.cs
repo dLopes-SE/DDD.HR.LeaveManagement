@@ -16,7 +16,7 @@ namespace Identity;
 
 public static class IdentityServiceRegistration
 {
-  public static IServiceCollection ConfigureIdentityServices(this IServiceCollection services, IConfiguration configuration)
+  public static IServiceCollection AddIdentityServices(this IServiceCollection services, IConfiguration configuration)
   {
     services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
 
@@ -29,7 +29,7 @@ public static class IdentityServiceRegistration
       .AddEntityFrameworkStores<HrLeaveManagementIdentityDbContext>()
       .AddDefaultTokenProviders();
 
-    services.AddTransient<IAuthService, IAuthService>();
+    services.AddTransient<IAuthService, AuthService>();
     services.AddTransient<IUserService, UserService>();
 
     services.AddAuthentication(options =>
