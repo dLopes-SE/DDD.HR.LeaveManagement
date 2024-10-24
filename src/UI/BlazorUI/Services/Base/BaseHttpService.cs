@@ -1,4 +1,5 @@
 ﻿using Blazored.LocalStorage;
+using System.Net.Http.Headers;
 
 namespace BlazorUI.Services.Base;
 public class BaseHttpService
@@ -33,5 +34,11 @@ public class BaseHttpService
         Success = false
       }
     };
+  }
+
+  protected async Task AddBearerToken()
+  {
+    if (await _localStorage.ContainKeyAsync("token"))
+      _client.HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _localStorage.GetItemAsStringAsync("token"));
   }
 }  

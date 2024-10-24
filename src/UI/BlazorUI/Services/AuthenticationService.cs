@@ -1,12 +1,17 @@
 ﻿using Blazored.LocalStorage;
 using BlazorUI.Contracts;
+using BlazorUI.Providers;
 using BlazorUI.Services.Base;
+using Microsoft.AspNetCore.Components.Authorization;
 
 namespace BlazorUI.Services;
 public class AuthenticationService : BaseHttpService, IAuthenticationService
 {
-  public AuthenticationService(IClient client, ILocalStorageService localStorage) : base(client, localStorage)
+  private readonly AuthenticationStateProvider _authenticationStateProvider;
+
+  public AuthenticationService(IClient client, ILocalStorageService localStorage, AuthenticationStateProvider authenticationStateProvider) : base(client, localStorage)
   {
+    _authenticationStateProvider = authenticationStateProvider;
   }
 
   public async Task<bool> AuthenticateAsync(string email, string password)
@@ -26,6 +31,8 @@ public class AuthenticationService : BaseHttpService, IAuthenticationService
         await _localStorage.SetItemAsStringAsync("token", authResponse.Token);
 
         // Set claims in Blazor and login state
+        await ((ApiAuthenticationStateProvider)_authenticationStateProvider).LoggedIn();
+
         return true;
       }
 
@@ -39,9 +46,8 @@ public class AuthenticationService : BaseHttpService, IAuthenticationService
 
   public async Task Logout()
   {
-    await _localStorage.RemoveItemAsync("token");
-
-    // remove claims in Blazor and invalidate login state
+    // Remove claims and invalidate login state
+    await ((ApiAuthenticationStateProvider)_authenticationStateProvider).LoggedOut();
   }
 
   public async Task<bool> RegisterAsync(string firstName, string lastName, string userName, string email, string password)
