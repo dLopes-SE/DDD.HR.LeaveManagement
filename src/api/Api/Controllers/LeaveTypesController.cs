@@ -23,7 +23,7 @@ namespace Api.Controllers
     {
       var leaveTypes = await _mediator.Send(new GetLeaveTypesQuery());
       if (leaveTypes.Count is 0)
-        return NoContent()
+        return NoContent();
 
       return Ok(leaveTypes);
     }
