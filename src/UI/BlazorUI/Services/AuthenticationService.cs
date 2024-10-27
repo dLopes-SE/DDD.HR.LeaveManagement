@@ -50,7 +50,7 @@ public class AuthenticationService : BaseHttpService, IAuthenticationService
     await ((ApiAuthenticationStateProvider)_authenticationStateProvider).LoggedOut();
   }
 
-  public async Task<bool> RegisterAsync(string firstName, string lastName, string userName, string email, string password)
+  public async Task<(bool, string)> RegisterAsync(string firstName, string lastName, string userName, string email, string password)
   {
     try
     {
@@ -66,14 +66,14 @@ public class AuthenticationService : BaseHttpService, IAuthenticationService
       var authResponse = await _client.RegisterAsync(registrationRequest);
       if (!string.IsNullOrEmpty(authResponse.Id))
       {
-        return true;
+        return (true, string.Empty);
       }
 
-      return false;
+      return (false, String.Empty);
     }
-    catch
+    catch (Exception ex)
     {
-      return false;
+      return (false, ex.Message);
     }
   }
 }
