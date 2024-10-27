@@ -6,7 +6,7 @@ namespace BlazorUI.Pages;
 
 public partial class Login
 {
-  public RegisterVM Model { get; set; }
+  public LoginVM Model { get; set; }
   [Inject]
   public NavigationManager NavigationManager { get; set; }
   [Inject]
@@ -19,10 +19,10 @@ public partial class Login
 
   protected override void OnInitialized()
   {
-    Model = new RegisterVM();
+    Model = new LoginVM();
   }
 
-  protected async void HandleValidSubmit()
+  protected async void HandleLogin()
   {
     if (await AuthenticationService.AuthenticateAsync(Model.Email, Model.Password))
       NavigationManager.NavigateTo("/");

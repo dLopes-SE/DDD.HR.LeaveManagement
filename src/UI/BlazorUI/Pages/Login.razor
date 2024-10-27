@@ -10,7 +10,7 @@
 
 <div class="row">
   <div class="col-md-4">
-    <EditForm Model="@Model" OnValidFormSubmit="HandleLogin">
+    <EditForm Model="@Model" OnValidSubmit="HandleLogin">
       <DataAnnotationsValidator />
       <ValidationSummary />
 
@@ -24,6 +24,10 @@
         <label for="Password">Password</label>
         <InputText id="Password" class="form-control" @bind-Value="Model.Password" />
         <ValidationMessage For="@(() => Model.Password)" />
+      </div>
+
+      <div class="form-group mt-2">
+        <input type="submit" value="Login" class="btn btn-primary"/>
       </div>
 
     </EditForm>
