@@ -46,9 +46,22 @@ namespace BlazorUI.Services
 
     public async Task<List<LeaveTypeVM>> GetLeaveTypes()
     {
-      await AddBearerToken();
-      var leaveTypes = await _client.LeaveTypesAllAsync();
-      return _mapper.Map<List<LeaveTypeVM>>(leaveTypes);
+      try
+      {
+        await AddBearerToken();
+        var leaveTypes = await _client.LeaveTypesAllAsync();
+        return _mapper.Map<List<LeaveTypeVM>>(leaveTypes);
+      }
+      catch (ApiException ex)
+      {
+        if (ex.StatusCode is not 204)
+        {
+          // Log exception
+        }
+        // Else simply return an empty list of leave types
+
+        return _mapper.Map<List<LeaveTypeVM>>(new List<LeaveTypeDto>());
+      }
     }
 
     public async Task<LeaveTypeVM> GetLeaveTypeDetails(int id)

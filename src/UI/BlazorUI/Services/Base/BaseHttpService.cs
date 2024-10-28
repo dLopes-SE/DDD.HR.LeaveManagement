@@ -28,6 +28,11 @@ public class BaseHttpService
         Message = "The record was not found",
         Success = false
       },
+      204 => new Response<Guid>
+      {
+        Message = "No data",
+        Success = false
+      },
       _ => new Response<Guid>
       {
         Message = "Something went wrong, please try again later",

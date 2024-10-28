@@ -1,0 +1,6 @@
+﻿@page "/leavetypes/create"
+@attribute [Authorize(Roles = "Administrator")]
+
+<h3>Create Leave Type</h3>
+
+<FormComponent ButtonText="Create" LeaveType="leaveType" OnValidSubmit="CreateLeaveType"/>

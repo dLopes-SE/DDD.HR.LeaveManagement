@@ -1,7 +1,6 @@
 using BlazorUI.Contracts;
 using BlazorUI.Models;
 using Microsoft.AspNetCore.Components;
-using System.Reflection.Metadata;
 
 namespace BlazorUI.Pages.LeaveTypes
 {
@@ -41,6 +40,7 @@ namespace BlazorUI.Pages.LeaveTypes
       var response = await LeaveTypeService.DeleteLeaveType(id);
       if (response.Success)
       {
+        LeaveTypes.RemoveAll(item => item.Id == id);
         StateHasChanged();
       }
       else
