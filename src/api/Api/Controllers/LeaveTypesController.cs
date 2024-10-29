@@ -44,7 +44,13 @@ namespace Api.Controllers
     public async Task<ActionResult<int>> Create([FromBody] CreateLeaveTypeCommand leaveTypeObj)
     {
       var id = await _mediator.Send(leaveTypeObj);
-      return CreatedAtAction(nameof(Get), new { id });
+      //return CreatedAtAction(nameof(Create), new { id }); => This produces a JSON response like '{id: 1}'. => however, the client expects a plain text response with the id (due to the use of nswag)
+      return new ContentResult
+      {
+        StatusCode = 201,
+        Content = id.ToString(),
+        ContentType = "text/plain"
+      };
     }
 
     [HttpPut]

@@ -1,14 +1,11 @@
-﻿using BlazorUI.Models;
+﻿using BlazorUI.Contracts;
+using BlazorUI.Models;
 using Microsoft.AspNetCore.Components;
-using Blazored.Toast.Services;
-using BlazorUI.Contracts;
 
 namespace BlazorUI.Pages.LeaveTypes;
 
 public partial class Create
 {
-  [Inject]
-  IToastService _toastService { get; set; }
   [Inject]
   NavigationManager _navManager { get; set; }
   [Inject]
@@ -21,8 +18,6 @@ public partial class Create
     var response = await _client.CreateLeaveType(leaveType);
     if (response.Success)
     {
-      _toastService.ShowSuccess("Leave Type created Successfully");
-      _toastService.ShowToast(ToastLevel.Info, "Test");
       _navManager.NavigateTo("/leavetypes");
     }
 

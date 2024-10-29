@@ -1,15 +1,10 @@
-﻿using Blazored.Toast.Services;
-using BlazorUI.Contracts;
+﻿using BlazorUI.Contracts;
 using BlazorUI.Models;
 using Microsoft.AspNetCore.Components;
-using System.Runtime.CompilerServices;
-using System.Xml.Serialization;
 
 namespace BlazorUI.Pages.LeaveTypes;
 public partial class Edit
 {
-  [Inject]
-  IToastService _toastService { get; set; }
   [Inject]
   NavigationManager _navManager { get; set; }
   [Inject]
@@ -29,10 +24,7 @@ public partial class Edit
   {
     var response = await _client.UpdateLeaveType(Id, leaveType);
     if (response.Success)
-    {
-      _toastService.ShowSuccess("Leave Type updated Successfully");
       _navManager.NavigateTo("/leavetypes");
-    }
 
     Message = response.Message;
   }

@@ -15,18 +15,18 @@ namespace BlazorUI.Services
       _mapper = mapper;
     }
 
-    public async Task<Response<Guid>> CreateLeaveType(LeaveTypeVM leaveType)
+    public async Task<Response<int>> CreateLeaveType(LeaveTypeVM leaveType)
     {
       try
       {
         await AddBearerToken();
         var createLeaveTypeCommand = _mapper.Map<CreateLeaveTypeCommand>(leaveType);
         await _client.LeaveTypesPOSTAsync(createLeaveTypeCommand);
-        return new Response<Guid> { Success = true };
+        return new Response<int> { Success = true };
       }
       catch (ApiException ex)
       {
-        return ConvertApiExceptions<Guid>(ex);
+        return ConvertApiExceptions<int>(ex);
       }
     }
 

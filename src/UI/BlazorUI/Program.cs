@@ -1,5 +1,4 @@
 using Blazored.LocalStorage;
-using Blazored.Toast;
 using BlazorUI;
 using BlazorUI.Contracts;
 using BlazorUI.Providers;
@@ -21,7 +20,6 @@ builder.Services.AddHttpClient<IClient, Client>(client => client.BaseAddress = n
 // Register JwtSecurityTokenHandler
 builder.Services.AddSingleton<JwtSecurityTokenHandler>();
 
-builder.Services.AddBlazoredToast();
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddAuthorizationCore();
 builder.Services.AddScoped<AuthenticationStateProvider, ApiAuthenticationStateProvider>();

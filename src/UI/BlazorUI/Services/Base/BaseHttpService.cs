@@ -13,29 +13,29 @@ public class BaseHttpService
     _localStorage = localStorage;
   }
 
-  protected Response<Guid> ConvertApiExceptions<Guid>(ApiException ex)
+  protected Response<T> ConvertApiExceptions<T>(ApiException ex)
   {
     return ex.StatusCode switch
     {
-      400 => new Response<Guid>
+      400 => new Response<T>
       {
         Message = "Invalid data was submitted",
         ValidationErrors = ex.Response,
         Success = false
       },
-      404 => new Response<Guid>
+      404 => new Response<T>
       {
         Message = "The record was not found",
         Success = false
       },
-      204 => new Response<Guid>
+      204 => new Response<T>
       {
         Message = "No data",
         Success = false
       },
-      _ => new Response<Guid>
+      _ => new Response<T>
       {
-        Message = "Something went wrong, please try again later",
+        Message = ex.Message,//"Something went wrong, please try again later",
         Success = false
       }
     };
