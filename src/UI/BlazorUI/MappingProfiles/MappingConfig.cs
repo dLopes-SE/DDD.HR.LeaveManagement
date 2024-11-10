@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
-using BlazorUI.Models;
+using BlazorUI.Models.LeaveTypes;
 using BlazorUI.Services.Base;
 
 namespace BlazorUI.MappingProfiles
 {
-  public class MappingConfig : Profile
+    public class MappingConfig : Profile
   {
     public MappingConfig()
     {

@@ -8,6 +8,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\LeaveAllocations\CreateLeaveAllocationVM.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Models\LeaveAllocations\CreateLeaveAllocationVM.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="Blazored.LocalStorage" Version="4.5.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.10" />

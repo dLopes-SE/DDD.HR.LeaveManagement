@@ -1,16 +1,19 @@
 using BlazorUI.Contracts;
-using BlazorUI.Models;
+using BlazorUI.Models.LeaveTypes;
 using Microsoft.AspNetCore.Components;
 
 namespace BlazorUI.Pages.LeaveTypes
 {
-  public partial class Index
+    public partial class Index
   {
     [Inject]
     public NavigationManager NavigationManager { get; set; }
 
     [Inject]
     public ILeaveTypeService LeaveTypeService { get; set; }
+
+    [Inject]
+    public ILeaveAllocationService LeaveAllocationService { get; set; }
 
     public List<LeaveTypeVM> LeaveTypes { get; private set; }
     public string Message { get; set; } = string.Empty;
@@ -22,7 +25,9 @@ namespace BlazorUI.Pages.LeaveTypes
 
     protected void AllocateLeaveType(int id)
     {
-      // Use Leave Allocation Service here
+      LeaveAllocationService.CreateLeaveAllocations(id)
+        .GetAwaiter()
+        .GetResult();
     }
 
     protected void EditLeaveType(int id)

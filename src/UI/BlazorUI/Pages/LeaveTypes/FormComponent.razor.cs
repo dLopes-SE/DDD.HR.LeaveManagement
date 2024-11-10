@@ -1,4 +1,4 @@
-﻿using BlazorUI.Models;
+﻿using BlazorUI.Models.LeaveTypes;
 using Microsoft.AspNetCore.Components;
 
 namespace BlazorUI.Pages.LeaveTypes;

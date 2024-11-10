@@ -6,9 +6,9 @@ using MediatR;
 
 namespace Api.Controllers
 {
-  public class CreateLeaveRequestCommandHandler(IMapper mapper, ILeaveTypeRepository leaveTypeRepo, ILeaveRequestRepository leaveRequestRepo) : IRequestHandler<CreateLeaveRequestCommand, int>
+  public class CreateLeaveRequestCommandHandler(IMapper mapper, ILeaveTypeRepository leaveTypeRepo, ILeaveRequestRepository leaveRequestRepo) : IRequestHandler<CreateLeaveRequestCommand, Unit>
   {
-    public async Task<int> Handle(CreateLeaveRequestCommand request, CancellationToken cancellationToken)
+    public async Task<Unit> Handle(CreateLeaveRequestCommand request, CancellationToken cancellationToken)
     {
       var validator = new CreateLeaveRequestCommandValidator(leaveTypeRepo);
       var validationResult = await validator.ValidateAsync(request, cancellationToken);
@@ -20,7 +20,17 @@ namespace Api.Controllers
 
       await leaveRequestRepo.CreateAsync(data);
 
-      return data.Id;
+      // Get requestiing employee's id
+
+      // Check on employee's allocation
+
+      // if allocations aren't enough, return validation error with message
+
+      // Create leave request
+
+      // Send email (which we haven't implemented)
+
+      return Unit.Value;
     }
   }
 }
