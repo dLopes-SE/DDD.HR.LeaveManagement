@@ -1,19 +1,24 @@
 ﻿using Application.Interfaces.Identity;
 using Application.Models.Identity;
 using Identity.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace Identity.Services
 {
   public class UserService : IUserService
   {
     private readonly UserManager<ApplicationUser> _userManager;
+    private readonly IHttpContextAccessor _contextAccessor;
 
-    public UserService(UserManager<ApplicationUser> userManager)
+    public UserService(UserManager<ApplicationUser> userManager, IHttpContextAccessor contextAccessor)
     {
       _userManager = userManager;
+      _contextAccessor = contextAccessor;
     }
 
+    public string UserId => _contextAccessor.HttpContext?.User?.FindFirstValue("uid");
     public async Task<List<Employee>> GetEmployees()
     {
       var users = await _userManager.GetUsersInRoleAsync("Employee");

@@ -5,9 +5,9 @@ namespace Application.Features.LeaveAllocation.Command.CreateLeaveAllocation
 {
   public class CreateLeaveAllocationCommandValidator : AbstractValidator<CreateLeaveAllocationCommand>
   {
-    private readonly ILeaveAllocationRepository _leaveTypeRepo;
+    private readonly ILeaveTypeRepository _leaveTypeRepo;
 
-    public CreateLeaveAllocationCommandValidator(ILeaveAllocationRepository leaveTypeRepo)
+    public CreateLeaveAllocationCommandValidator(ILeaveTypeRepository leaveTypeRepo)
     {
       _leaveTypeRepo = leaveTypeRepo;
 

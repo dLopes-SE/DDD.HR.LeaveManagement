@@ -6,5 +6,6 @@ namespace Application.Interfaces.Identity
   {
     Task<List<Employee>> GetEmployees();
     Task<Employee> GetEmployeeById(int id);
+    public string UserId { get; }
   }
 }

@@ -1,9 +1,9 @@
-﻿using BlazorUI.Models;
+﻿using BlazorUI.Models.LeaveTypes;
 using BlazorUI.Services.Base;
 
 namespace BlazorUI.Contracts
 {
-  public interface ILeaveTypeService
+    public interface ILeaveTypeService
   {
     Task<List<LeaveTypeVM>> GetLeaveTypes();
     Task<LeaveTypeVM> GetLeaveTypeDetails(int id);

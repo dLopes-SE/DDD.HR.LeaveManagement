@@ -35,7 +35,7 @@ public class BaseHttpService
       },
       _ => new Response<T>
       {
-        Message = ex.Message,//"Something went wrong, please try again later",
+        Message = "Something went wrong, please try again later",
         Success = false
       }
     };
